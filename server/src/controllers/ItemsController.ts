@@ -1,14 +1,8 @@
 import { Request, Response } from "express";
 import knex from "../database/connection";
 
-interface IRequestProps {
-  sort?: "ASC" | "DESC";
-}
-
 class ItemsController {
   async index(request: Request, response: Response) {
-    const { sort }: IRequestProps = request.params;
-
     const items = await knex("items").select("*");
 
     const serializedItems = items.map((item) => {
